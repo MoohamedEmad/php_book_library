@@ -98,6 +98,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             }
         }
 $_SESSION["success"]="book is update ";
+header("Location: index.php");
+exit;
 
       }else{
          $maxId = max(array_column($_SESSION['books'], "id"));
@@ -161,7 +163,7 @@ $_SESSION["success"]="book is update ";
         <div class="mb-3"><!-- margin buttom =3 -->
             <label class="form-label">Title</label>
             <input name="title" class="form-control <?php echo isset($errors['title'])?'is-invalid':'';?>"
-            value ="<?php echo isset($submittedData['title'])?$submittedData['title']:'';?>"><!-- وعند اعادة تحميل الصفحة يعيد القيمة السابقة في الحقل 
+            value ="<?php echo isset($submittedData['title'])? htmlspecialchars($submittedData['title']):'';?>"><!-- وعند اعادة تحميل الصفحة يعيد القيمة السابقة في الحقل 
            form-control مع  is-invalid اذا يوجد خطا اجعل الحقل به خاصية  -->
             <div class="invalid-feedback"><?php echo isset($errors['title'] )? $errors['title']:''; ?></div><!--php يطبع رسالة الخطا الي في --> 
         </div>
@@ -171,7 +173,7 @@ $_SESSION["success"]="book is update ";
 
         <div class="mb-3">
             <label class="form-label">Author</label>
-            <input name="author" class="form-control <?php echo isset($errors['author'])?'is-invalid':'';?>" value="<?php echo isset($submittedData['author'])?$submittedData['author']:'';?>"> 
+            <input name="author" class="form-control <?php echo isset($errors['author'])?'is-invalid':'';?>" value="<?php echo isset($submittedData['author'])? htmlspecialchars($submittedData['author']):'';?>"> 
             <div class="invalid-feedback"><?php echo isset($errors['author'])?$errors['author']:'';  ?></div>
         </div>
 
@@ -191,14 +193,14 @@ $_SESSION["success"]="book is update ";
         <div class="mb-3">
             <label class="form-label">Year</label>
             <input name="year" class="form-control <?php echo isset($errors['year'])?'is-invalid':'' ?>"
-                   value="<?php echo $submittedData['year'] ?>">
+                        value="<?php echo isset($submittedData['year']) ? htmlspecialchars($submittedData['year']) : ''; ?>">
             <div class="invalid-feedback"><?php echo isset($errors['year'])?$errors['year']:'' ?></div>
         </div>
 
         <div class="mb-3">
             <label class="form-label">Pages</label>
             <input name="pages" class="form-control <?php echo isset($errors['pages'])?'is-invalid':'' ?>"
-                   value="<?php echo isset($submittedData['pages'])?$submittedData['pages']:'' ?>">
+                    value="<?php echo isset($submittedData['pages']) ? htmlspecialchars($submittedData['pages']) : ''; ?>">
             <div class="invalid-feedback"><?php echo isset($errors['pages'])?$errors['pages']: '' ?></div>
         </div>
 
